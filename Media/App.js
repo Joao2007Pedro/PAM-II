@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
 export default function App() {
   const [valores, setValores] = useState(["", "", "", ""]);
@@ -24,59 +25,58 @@ export default function App() {
   };
 
   return (
-    <div className="container">
-      <h2>Calculadora de Média</h2>
-      <div className="inputs">
-        {valores.map((valor, index) => (
-          <input
-            key={index}
-            type="number"
-            value={valor}
-            onChange={(e) => handleChange(index, e.target.value)}
-            placeholder={`Nota ${index + 1}`}
-          />
-        ))}
-      </div>
-      <button onClick={calcularMedia}>Calcular Média</button>
+    <View style={styles.container}>
+      <Text style={styles.title}>Calculadora de Média</Text>
+      {valores.map((valor, index) => (
+        <TextInput
+          key={index}
+          style={styles.input}
+          keyboardType="numeric"
+          value={valor}
+          onChangeText={(text) => handleChange(index, text)}
+          placeholder={`Nota ${index + 1}`}
+        />
+      ))}
+      <Button title="Calcular Média" onPress={calcularMedia} />
       {media !== null && (
-        <div className="resultado">
-          <p>Média: {media}</p>
-          <p className={status === "Aprovado" ? "aprovado" : "reprovado"}>{status}</p>
-        </div>
+        <View style={styles.resultado}>
+          <Text>Média: {media}</Text>
+          <Text style={status === "Aprovado" ? styles.aprovado : styles.reprovado}>{status}</Text>
+        </View>
       )}
-      <style>{`
-        .container {
-          text-align: center;
-          margin-top: 50px;
-          font-family: Arial, sans-serif;
-        }
-        .inputs input {
-          margin: 5px;
-          padding: 8px;
-          width: 80px;
-          text-align: center;
-        }
-        button {
-          margin-top: 10px;
-          padding: 10px 20px;
-          background-color: #007bff;
-          color: white;
-          border: none;
-          cursor: pointer;
-          border-radius: 5px;
-        }
-        .resultado {
-          margin-top: 20px;
-          font-size: 18px;
-          font-weight: bold;
-        }
-        .aprovado {
-          color: green;
-        }
-        .reprovado {
-          color: red;
-        }
-      `}</style>
-    </div>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f4f4f4",
+    padding: 20,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 8,
+    margin: 5,
+    width: 100,
+    textAlign: "center",
+    borderRadius: 5,
+  },
+  resultado: {
+    marginTop: 20,
+  },
+  aprovado: {
+    color: "green",
+  },
+  reprovado: {
+    color: "red",
+  },
+});
