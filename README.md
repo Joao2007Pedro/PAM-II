@@ -67,8 +67,11 @@ Conteúdos praticados:
 ## 🏫 Contexto Acadêmico
 
 Disciplina: **PAM 2 — Programação de Aplicativos Mobile 2**
+
 Curso: **Desenvolvimento de Sistemas**
+
 Instituição: **ETEC**
+
 Ano: **2º ano do curso**
 
 ---
